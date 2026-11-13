@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Raw datasets (verify distribution rights before publishing)
+raw_data.csv
+data/raw/
+data/*.csv
+data/*.xlsx
+
+# Temporary files
+*.log
+.DS_Store
+Thumbs.db
+
+# IDE settings
+.vscode/
+.idea/
