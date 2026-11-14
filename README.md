@@ -34,34 +34,22 @@ The original event dataset is not redistributed here. Refer to the data provider
 
 **Methodological note:** Possession is inferred from event records rather than continuously observed. The definition of possession change can materially affect results.
 
-## Preliminary results
+## Final results
 
-The revised analysis produced the following summary. These are project analysis outputs and remain subject to case-level validation.
+The final report uses the revised possession-change rules. It identifies 5,303 valid high turnovers; 1,204 linked to a shot within 15 seconds (22.7%) and 95 linked to a goal (1.79%). Among shot-linked sequences, 7.9% also linked to a goal.
 
-| Metric | Revised result |
-| --- | ---: |
-| Identified high turnovers | 11,018 |
-| Shot-linked sequences within 15 seconds | 998 |
-| Goal-linked sequences | 78 |
-| Shot-linked share | 9.06% |
-| Goal-linked share | 0.71% |
+| Event category | High turnovers | Shot-linked | Goal-linked | Shot rate | Goal rate |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Recovery | 3,548 | 903 | 64 | 25.5% | 1.80% |
+| Duel | 610 | 84 | 6 | 13.8% | 0.98% |
+| Interception | 510 | 89 | 11 | 17.5% | 2.16% |
+| Tackle | 397 | 74 | 7 | 18.6% | 1.76% |
+| Block | 238 | 54 | 7 | 22.7% | 2.94% |
+| **Total** | **5,303** | **1,204** | **95** | **22.7%** | **1.79%** |
 
-### By event category
+These counts describe turnover-linked sequences, not unique match shots or goals. Event-based possession inference and observed associations do not establish causal effects of pressing. See the attached report for figures, methods, and limitations.
 
-| Event category | High turnovers | Shot-linked | Goal-linked |
-| --- | ---: | ---: | ---: |
-| Recovery | 5,082 | 734 | 52 |
-| Interception | 3,114 | 83 | 8 |
-| Duel | 1,494 | 66 | 6 |
-| Tackle | 745 | 67 | 6 |
-| Block | 583 | 48 | 6 |
-| **Total** | **11,018** | **998** | **78** |
-
-Earlier analysis outputs were 11,660 turnovers, 1,352 shot-linked sequences, and 145 goal-linked sequences. The revised results reflect changes in the identification and tracking logic; a complete case-by-case reconciliation of these differences has not yet been established.
-
-These statistics describe observed event sequences, not causal effects of pressing.
-
-## Repository contents
+## Final report\n\nThe complete report, including figures, is available as [DOCX](./reports/K%EB%A6%AC%EA%B7%B81_%EC%A0%84%EB%B0%A9%ED%83%88%EC%B7%A8_%EB%B6%84%EC%84%9D_%EA%B2%B0%EA%B3%BC%EB%B3%B4%EA%B3%A0%EC%84%9C_%EC%99%84%EC%84%B1%EB%B3%B8.docx).\n\n## Repository contents
 
 ```text
 K-league_high_turnover_analysis/
