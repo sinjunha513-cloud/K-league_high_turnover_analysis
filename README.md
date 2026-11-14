@@ -6,11 +6,21 @@
 
 This project investigates how winning the ball in advanced areas of the pitch relates to subsequent shots and goals. A key methodological challenge is distinguishing an event recorded for the opposing team (such as a block) from an actual change in possession.
 
+## Contribution and project scope
+
+**Junha Shin — independent project, 2 months.** Responsible for the analysis pipeline, possession-inference logic, visualizations, and report preparation.
+
+The central challenge was deciding when an event represented actual control of the ball. An opposing team's block or duel does not automatically imply a completed possession change. The analysis uses event type, outcome, and subsequent control evidence to define turnover sequences.
+
+**Completed:** descriptive event-sequence analysis and an illustrated report. **Future work:** video validation of ambiguous cases and systematic sensitivity experiments. This project does not train a tracking or world model.
+
 ## Research questions
 
 - How often do identified high turnovers lead to shots or goals within 15 seconds?
 - How do outcomes differ by turnover event type?
-- How sensitive are the results to possession-change and sequence-tracking rules?
+- How do outcomes vary by turnover location, event type, and team?
+
+**Follow-up question:** How robust are these patterns to alternative possession rules and time windows? A systematic sensitivity study remains future work.
 
 ## Data
 
@@ -51,7 +61,7 @@ These counts describe turnover-linked sequences, not unique match shots or goals
 
 ## Final report
 
-The complete report, including figures, is available as [DOCX](./reports/K%EB%A6%AC%EA%B7%B81_%EC%A0%84%EB%B0%A9%ED%83%88%EC%B7%A8_%EB%B6%84%EC%84%9D_%EA%B2%B0%EA%B3%BC%EB%B3%B4%EA%B3%A0%EC%84%9C_%EC%99%84%EC%84%B1%EB%B3%B8.docx).
+Read the illustrated [PDF report](./reports/K_League_High_Turnover_Report.pdf), or download the editable [DOCX](./reports/K%EB%A6%AC%EA%B7%B81_%EC%A0%84%EB%B0%A9%ED%83%88%EC%B7%A8_%EB%B6%84%EC%84%9D_%EA%B2%B0%EA%B3%BC%EB%B3%B4%EA%B3%A0%EC%84%9C_%EC%99%84%EC%84%B1%EB%B3%B8.docx).
 
 ## Repository contents
 
@@ -59,7 +69,8 @@ The complete report, including figures, is available as [DOCX](./reports/K%EB%A6
 K-league_high_turnover_analysis/
 ├── 전방탈취_최종본.ipynb   # Analysis notebook
 ├── reports/
-│   └── K리그1_전방탈취_분석_결과보고서_완성본.docx  # Illustrated final report
+│   ├── K_League_High_Turnover_Report.pdf  # Browser-readable report
+│   └── K리그1_전방탈취_분석_결과보고서_완성본.docx  # Editable report
 ├── requirements.txt       # Python dependencies (provisional; awaiting import verification)
 ├── .gitignore             # Files excluded from Git tracking
 └── README.md              # Project documentation
@@ -85,7 +96,17 @@ K-league_high_turnover_analysis/
 - Validate ambiguous possession changes using individual event sequences.
 - Reconcile initial and revised analysis outputs on a case-by-case basis.
 - Evaluate the sensitivity of results to alternative turnover definitions and time windows.
-- Add verified visualizations and team-level comparisons.
+- The report includes spatial and team-level descriptive comparisons; these do not control for team strength or match context.
+- A logistic regression attempt in the notebook did not complete because of a singular-matrix error; no adjusted effects or significance claims are reported.
+- Calculated team sequence speeds were implausibly high (155–519 m/s). The report excludes these values from quantitative conclusions; their time units and calculation require investigation.
+
+## Evidence and verification
+
+The headline counts above agree with the notebook's saved outputs (5,303 turnovers, 1,204 shot-linked sequences, and 95 goal-linked sequences) and the final report. This is a consistency check of stored results, not an independent rerun on the source data. An alternative approximate reconstruction yields 6,735 turnovers; it is not a controlled ablation because multiple definitions differ.
+
+## Motivation for future research
+
+Event data describes recorded actions but does not continuously observe every player's movement. This motivates a future interest in video-based player tracking and models of player interaction and future motion. These are proposed directions, distinct from the completed event-based analysis.
 
 ## Author
 
