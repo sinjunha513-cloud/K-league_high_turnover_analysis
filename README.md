@@ -49,7 +49,11 @@ The final report uses the revised possession-change rules. It identifies 5,303 v
 
 These counts describe turnover-linked sequences, not unique match shots or goals. Event-based possession inference and observed associations do not establish causal effects of pressing. See the attached report for figures, methods, and limitations.
 
-## Final report\n\nThe complete report, including figures, is available as [DOCX](./reports/K%EB%A6%AC%EA%B7%B81_%EC%A0%84%EB%B0%A9%ED%83%88%EC%B7%A8_%EB%B6%84%EC%84%9D_%EA%B2%B0%EA%B3%BC%EB%B3%B4%EA%B3%A0%EC%84%9C_%EC%99%84%EC%84%B1%EB%B3%B8.docx).\n\n## Repository contents
+## Final report
+
+The complete report, including figures, is available as [DOCX](./reports/K%EB%A6%AC%EA%B7%B81_%EC%A0%84%EB%B0%A9%ED%83%88%EC%B7%A8_%EB%B6%84%EC%84%9D_%EA%B2%B0%EA%B3%BC%EB%B3%B4%EA%B3%A0%EC%84%9C_%EC%99%84%EC%84%B1%EB%B3%B8.docx).
+
+## Repository contents
 
 ```text
 K-league_high_turnover_analysis/
