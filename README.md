@@ -58,7 +58,7 @@ The complete report, including figures, is available as [DOCX](./reports/K%EB%A6
 ```text
 K-league_high_turnover_analysis/
 ├── 전방탈취_최종본.ipynb   # Analysis notebook
-├── requirements.txt       # Python dependencies (provisional; awaiting import verification)
+├── reports/\n│   └── K리그1_전방탈취_분석_결과보고서_완성본.docx  # Illustrated final report\n├── requirements.txt       # Python dependencies (provisional; awaiting import verification)
 ├── .gitignore             # Files excluded from Git tracking
 └── README.md              # Project documentation
 ```
