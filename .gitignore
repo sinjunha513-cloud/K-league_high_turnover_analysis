@@ -22,3 +22,8 @@ Thumbs.db
 # IDE settings
 .vscode/
 .idea/
+
+# Local match metadata and event-level derived outputs
+match_info.csv
+results_revalidated/sequences.csv
+results_revalidated/baseline_membership_comparison.csv

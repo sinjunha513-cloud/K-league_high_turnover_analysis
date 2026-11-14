@@ -1,0 +1,13 @@
+{
+  "overall_shot_ci": [
+    21.72232137551169,
+    24.134685577563143
+  ],
+  "central_flank_difference_ci_pp": [
+    23.350119808920265,
+    28.2280894824676
+  ],
+  "zero_time_shots": 270,
+  "positive_time_shots": 941,
+  "positive_time_shot_pct": 17.7882797731569
+}

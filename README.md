@@ -1,115 +1,66 @@
-# K League 1 High Turnover & Attacking Transition Analysis
+# K League 1 High Turnover Analysis
 
-**Event-based analysis of attacking outcomes following high turnovers in the 2024 K League 1 season**
+**Junha Shin · Individual project · 2 months · GPT-assisted analysis**
 
-## Overview
+An event-based study of first-shot conversion after high turnovers in **198 matches, 12 teams, rounds 1–33 of the 2024 K League 1 season**. This is an observational analysis of event-derived control transitions, not a direct measurement of pressing intensity or causal tactical effects.
 
-This project investigates how winning the ball in advanced areas of the pitch relates to subsequent shots and goals. A key methodological challenge is distinguishing an event recorded for the opposing team (such as a block) from an actual change in possession.
+[Read the revised illustrated report](reports/K_League_High_Turnover_Report.pdf) · [Executed notebook](전방탈취_최종본.ipynb) · [Analysis code](analysis/revalidate.py)
 
-## Contribution and project scope
+## Revalidated results — 14 November 2026
 
-**Junha Shin — individual project, 2 months; GPT-assisted analysis and coding.** I used GPT extensively to help write and revise the analysis code and prepare the report. The repository documents an applied learning project and its outputs. My ability to read, modify, and debug Python independently is still developing.
+| Measure | Original reproduced analysis | Revised analysis |
+|---|---:|---:|
+| High turnovers | 5,303 | 5,290 |
+| First shots within 15 seconds | 1,204 | 1,211 |
+| Goals from those first shots | 95 | 94 |
+| Shot conversion | 22.70% | 22.89% |
+| Duplicate shot links | 1 | 0 |
 
-The central challenge was deciding when an event represented actual control of the ball. An opposing team's block or duel does not automatically imply a completed possession change. The analysis uses event type, outcome, and subsequent control evidence to define turnover sequences.
+The revised overall shot-conversion estimate has a match-bootstrap 95% interval of **21.72–24.13%**. Central, half-space and flank conversion rates are **37.42%, 22.05% and 11.60%**. Intervals describe sampling variability, not uncertainty in event annotation.
 
-**Completed:** descriptive event-sequence analysis and an illustrated report. **Future work:** video validation of ambiguous cases and systematic sensitivity experiments. This project does not train a tracking or world model.
+A descriptive binomial GLM adjusts for turnover x-coordinate and type, team, opponent, period, elapsed time, home status and the score strictly before the turnover. Standard errors are clustered by match. The central-versus-flank adjusted odds ratio is **5.61 (95% CI 4.68–6.71)**. This is not a probability ratio, a causal effect or an externally validated predictive model.
 
-## Research questions
+## What was repaired and tested
 
-- How often do identified high turnovers lead to shots or goals within 15 seconds?
-- How do outcomes differ by turnover event type?
-- How do outcomes vary by turnover location, event type, and team?
+- Reproduced the previous 5,303 / 1,204 / 95 baseline from the supplied raw files.
+- Counted one turnover per inferred control transition and removed duplicate shot attribution.
+- Used an explicit control-event set including Catch, Ball Received and Take-On.
+- Credited blocks at the subsequent confirmed control event: both the time origin and location refer to confirmed control. **This changes the operational definition from the earlier block-contact origin.**
+- Reconstructed final scores from scoring shots and own goals: **198/198 match scores agree**.
+- Cross-checked inferred attack direction against goal-kick positions in **766 match-period-team units**, with no conflicts. This is an internal consistency check, not video ground truth.
+- Removed the old progression-speed metric: it combined event-end distance with event-start elapsed time and produced implausible values. A secondary start-to-start net ball-progression rate is computed only for intervals of at least one second; it is not player speed.
+- Replaced post-turnover model variables such as “Direct Shot”, pass count and carrying with information available at the confirmed-control origin.
+- Verified model convergence and full design rank (34/34); checked nonlinear x, removal of Duel, and removal of Block.
+- Tested 5/10/15/20-second windows, x thresholds of 65/70/75m, control rules, block windows and ordering. The central-versus-flank association persists in these checks.
+- Passed **10 boundary-case tests**.
 
-**Follow-up question:** How robust are these patterns to alternative possession rules and time windows? A systematic sensitivity study remains future work.
+## Definitions and remaining limitations
 
-## Data
+Main threshold: normalized x ≥ 70m. The sequence ends at the first shot, opposing control, stoppage, restart, period boundary or 15 seconds. Goals refer only to the first shot; rebounds and own goals are not part of this outcome.
 
-The analysis was developed using 2024 K League 1 event data from the K League–University of Seoul Public AI Competition (DACON).
+**270 of 1,211 linked shots share the turnover timestamp.** The primary ordering uses time_seconds then action_id. Counting only positive-time shot links gives 941/5,290 (17.79%), a conservative timing check rather than a claim that simultaneous records were actual failures. There are 627 backwards timestamp steps under action_id ordering.
 
-| Item | Value |
-| --- | ---: |
-| Matches | 198 |
-| Teams | 12 |
-| Recorded events | 579,306 |
+Possession remains an event-derived operational estimate. Success in a duel or a recorded touch does not necessarily establish stable possession. No manually labelled video or another season was used for external validation. Off-ball positioning, pressing intensity, player ability and some match context remain unobserved. The dataset covers rounds 1–33, not the full season.
 
-The original event dataset is not redistributed here. Refer to the data provider's access and licensing terms.
+## Reproduce
 
-## Approach
+Python 3.12 was used. Install the analysis dependencies:
 
-1. Normalize event locations relative to attacking direction.
-2. Identify candidate ball recoveries in advanced areas of the pitch.
-3. Evaluate whether subsequent events support a genuine change in possession, rather than relying solely on a change of event-performing team.
-4. Track subsequent attacking actions within a 15-second window.
-5. Summarize shot- and goal-linked sequences by turnover category.
-
-**Methodological note:** Possession is inferred from event records rather than continuously observed. The definition of possession change can materially affect results.
-
-## Final results
-
-The final report uses the revised possession-change rules. It identifies 5,303 valid high turnovers; 1,204 linked to a shot within 15 seconds (22.7%) and 95 linked to a goal (1.79%). Among shot-linked sequences, 7.9% also linked to a goal.
-
-| Event category | High turnovers | Shot-linked | Goal-linked | Shot rate | Goal rate |
-| --- | ---: | ---: | ---: | ---: | ---: |
-| Recovery | 3,548 | 903 | 64 | 25.5% | 1.80% |
-| Duel | 610 | 84 | 6 | 13.8% | 0.98% |
-| Interception | 510 | 89 | 11 | 17.5% | 2.16% |
-| Tackle | 397 | 74 | 7 | 18.6% | 1.76% |
-| Block | 238 | 54 | 7 | 22.7% | 2.94% |
-| **Total** | **5,303** | **1,204** | **95** | **22.7%** | **1.79%** |
-
-These counts describe turnover-linked sequences, not unique match shots or goals. Event-based possession inference and observed associations do not establish causal effects of pressing. See the attached report for figures, methods, and limitations.
-
-## Final report
-
-Read the illustrated [PDF report](./reports/K_League_High_Turnover_Report.pdf), or download the editable [DOCX](./reports/K%EB%A6%AC%EA%B7%B81_%EC%A0%84%EB%B0%A9%ED%83%88%EC%B7%A8_%EB%B6%84%EC%84%9D_%EA%B2%B0%EA%B3%BC%EB%B3%B4%EA%B3%A0%EC%84%9C_%EC%99%84%EC%84%B1%EB%B3%B8.docx).
-
-## Repository contents
-
-```text
-K-league_high_turnover_analysis/
-├── 전방탈취_최종본.ipynb   # Analysis notebook
-├── reports/
-│   ├── K_League_High_Turnover_Report.pdf  # Browser-readable report
-│   └── K리그1_전방탈취_분석_결과보고서_완성본.docx  # Editable report
-├── requirements.txt       # Python dependencies (provisional; awaiting import verification)
-├── .gitignore             # Files excluded from Git tracking
-└── README.md              # Project documentation
+```bash
+pip install -r requirements.txt
+python analysis/revalidate.py --data raw_data.csv --matches match_info.csv --out results_revalidated
+python analysis/robustness.py results_revalidated
+python analysis/test_revalidate.py
 ```
 
-## Running the analysis
+Alternatively place both CSV files beside the notebook and run its cells in order. The notebook embeds the main analysis code. The supplementary script adds overall bootstrap intervals and model sensitivity checks.
 
-1. Clone this repository.
-2. Create a Python virtual environment.
-3. Install the listed dependencies:
+The raw files and event-level outputs are not redistributed publicly. Obtain the original files under their applicable terms. Aggregate outputs are in results_revalidated/. Running the code also produces sequences.csv locally. Source file SHA-256 and software versions are recorded in audit.json.
 
-   ```bash
-   pip install -r requirements.txt
-   ```
+The notebook in archive/ is the previous analysis for traceability; **do not use its old numbers as the current result**.
 
-4. Obtain the source dataset separately and update local data paths in the notebook.
-5. Open [전방탈취_최종본.ipynb](./전방탈취_최종본.ipynb) in Jupyter or VS Code and execute the cells in order.
+## Contribution and research motivation
 
-**Reproducibility status:** The notebook is provided, but the original dataset is not. The dependency list has not yet been fully validated against the notebook imports, and execution has not been independently verified.
+I used GPT extensively for code generation, revision, debugging and this revalidation. I contributed the sports-domain question and interpretation and am still developing independent Python reading, modification and debugging skills.
 
-## Limitations and next steps
-
-- Validate ambiguous possession changes using individual event sequences.
-- Reconcile initial and revised analysis outputs on a case-by-case basis.
-- Evaluate the sensitivity of results to alternative turnover definitions and time windows.
-- The report includes spatial and team-level descriptive comparisons; these do not control for team strength or match context.
-- A logistic regression attempt in the notebook did not complete because of a singular-matrix error; no adjusted effects or significance claims are reported.
-- Calculated team sequence speeds were implausibly high (155–519 m/s). The report excludes these values from quantitative conclusions; their time units and calculation require investigation.
-
-## Evidence and verification
-
-The headline counts above agree with the notebook's saved outputs (5,303 turnovers, 1,204 shot-linked sequences, and 95 goal-linked sequences) and the final report. This is a consistency check of stored results, not an independent rerun on the source data. An alternative approximate reconstruction yields 6,735 turnovers; it is not a controlled ablation because multiple definitions differ.
-
-## Motivation for future research
-
-Event data describes recorded actions but does not continuously observe every player's movement. This motivates a future interest in video-based player tracking and models of player interaction and future motion. These are proposed directions, distinct from the completed event-based analysis.
-
-## Author
-
-**Junha Shin** — [GitHub profile](https://github.com/sinjunha513-cloud)
-
-Interests: sports analytics, statistics, machine learning, and data science.
+The gap between event records and continuous player movement motivates my interest in estimating movement from football video, handling tracking uncertainty, and studying interactions and future motion. These are future research interests; no tracking or world model has been trained in this project.

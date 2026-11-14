@@ -1,0 +1,9 @@
+model,n,term,OR,low,high,converged
+main,5290,"C(zone, Treatment(reference=""Flank""))[T.Central]",5.605040691140381,4.679840743226747,6.713151765860689,True
+main,5290,"C(zone, Treatment(reference=""Flank""))[T.Half-space]",2.3912270219714857,1.9512970064398076,2.9303415378262687,True
+nonlinear_x,5290,"C(zone, Treatment(reference=""Flank""))[T.Central]",5.389382155279306,4.50975437615386,6.440581369403625,True
+nonlinear_x,5290,"C(zone, Treatment(reference=""Flank""))[T.Half-space]",2.314179722009413,1.895044737679134,2.826016546880243,True
+without_duel,4684,"C(zone, Treatment(reference=""Flank""))[T.Central]",5.721636584802575,4.736448417057405,6.911745326024207,True
+without_duel,4684,"C(zone, Treatment(reference=""Flank""))[T.Half-space]",2.416021329221246,1.9516270532628455,2.9909193221589585,True
+without_block,5021,"C(zone, Treatment(reference=""Flank""))[T.Central]",5.546548839858919,4.564508210014919,6.73987264727469,True
+without_block,5021,"C(zone, Treatment(reference=""Flank""))[T.Half-space]",2.4098624510751576,1.9446604064161845,2.9863502202960435,True

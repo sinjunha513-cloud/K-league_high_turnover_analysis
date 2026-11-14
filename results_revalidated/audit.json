@@ -1,0 +1,51 @@
+{
+  "turnovers": 5290,
+  "shots": 1211,
+  "goals": 94,
+  "shot_pct": 22.892249527410208,
+  "goal_pct": 1.776937618147448,
+  "events": 579306,
+  "games": 198,
+  "teams": 12,
+  "rounds": [
+    1,
+    33
+  ],
+  "date_range": [
+    "2024-03-01 05:00:00",
+    "2024-10-06 06:00:00"
+  ],
+  "duplicate_event_ids": 0,
+  "missing_core": 0,
+  "direction_groups": 792,
+  "shot_direction_groups": 782,
+  "goal_kick_crosschecks": 766,
+  "direction_conflicts": 0,
+  "final_score_matches": 198,
+  "final_score_mismatches": 0,
+  "duplicate_shots": 0,
+  "duplicate_possessions": 0,
+  "action_time_inversions": 627,
+  "rate_valid": 3709,
+  "rate_median": 0.6615010161618063,
+  "rate_max": 13.131923076923387,
+  "rate_p99": 7.10656592045761,
+  "model": {
+    "converged": true,
+    "rank": 34,
+    "columns": 34,
+    "condition_number": 48.77397470960391,
+    "max_abs_coefficient": 3.2578613609123934,
+    "clusters": 198,
+    "n": 5290,
+    "formula": "is_shot ~ C(zone, Treatment(reference=\"Flank\")) + x10 + C(turnover_type) + C(team_id) + C(opponent_id) + C(period_id) + minute10 + home + score_diff"
+  },
+  "sha256": "193cf9f9ef6c479ba7abdee007af6af96d0a6839745bc173b1e4fa4ca2438f02",
+  "versions": {
+    "python": "3.12.14",
+    "pandas": "2.2.3",
+    "numpy": "2.3.5",
+    "scipy": "1.17.0",
+    "statsmodels": "0.15.0"
+  }
+}

@@ -1,9 +1,7 @@
-
-pandas
-numpy
+numpy==2.3.5
+pandas==2.2.3
+scipy==1.17.0
+statsmodels==0.15.0
 matplotlib
 seaborn
-plotly
-scipy
-jupyter
-ipykernel
+nbformat
