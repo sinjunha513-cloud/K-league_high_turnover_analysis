@@ -8,7 +8,7 @@ This project investigates how winning the ball in advanced areas of the pitch re
 
 ## Contribution and project scope
 
-**Junha Shin — independent project, 2 months.** Responsible for the analysis pipeline, possession-inference logic, visualizations, and report preparation.
+**Junha Shin — individual project, 2 months; GPT-assisted analysis and coding.** I used GPT extensively to help write and revise the analysis code and prepare the report. The repository documents an applied learning project and its outputs. My ability to read, modify, and debug Python independently is still developing.
 
 The central challenge was deciding when an event represented actual control of the ball. An opposing team's block or duel does not automatically imply a completed possession change. The analysis uses event type, outcome, and subsequent control evidence to define turnover sequences.
 
